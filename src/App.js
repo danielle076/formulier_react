@@ -68,7 +68,7 @@ import './App.css';
 //     );
 // }
 
-// Formulier met react-hook-form
+// Formulier omgezet met react-hook-form
 function App() {
     const { handleSubmit, register } = useForm();
 
