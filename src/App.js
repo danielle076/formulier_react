@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 import './App.css';
 
 // Statisch formulier
@@ -70,10 +70,10 @@ import './App.css';
 
 // Formulier omgezet met react-hook-form
 function App() {
-    const { handleSubmit, register } = useForm();
+    const {handleSubmit, errors, register} = useForm();
 
     function onFormSubmit(data) {
-         console.log(data);
+        console.log(data);
     }
 
     return (
@@ -87,8 +87,14 @@ function App() {
                         type="text"
                         name="name"
                         id="details-name"
-                        ref={register}
+                        ref={register(
+                            {
+                                required: true,
+                                validate: (value) => value.includes('@'),
+                            }
+                        )}
                     />
+                    {errors.comments && <p>Je mag geen @ gebruiken</p>}
                 </label>
 
                 <label htmlFor="details-age">
@@ -127,9 +133,21 @@ function App() {
                         rows="4"
                         cols="40"
                         placeholder="Wat vond je van het recept?"
-                        ref={register}
+                        ref={register(
+                            {
+                                required: {
+                                    value: true,
+                                    message: "Dit veld mag niet leeg zijn",
+                                },
+                                maxLength: {
+                                    value: 50,
+                                    message: "Er mogen maximaal 50 karakters gebruikt worden",
+                                },
+                            }
+                        )}
                     >
-          </textarea>
+                    </textarea>
+                    {errors.comments && <p>Je bericht is te lang</p>}
                 </label>
 
                 <button type="submit">
