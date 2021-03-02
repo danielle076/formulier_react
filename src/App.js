@@ -70,7 +70,8 @@ import './App.css';
 
 // Formulier omgezet met react-hook-form
 function App() {
-    const {handleSubmit, errors, register} = useForm();
+    const {handleSubmit, errors, register, watch} = useForm();
+    const selectedReferrer = watch('found-through');
 
     function onFormSubmit(data) {
         console.log(data);
@@ -124,6 +125,13 @@ function App() {
                         <option value="anders">Anders</option>
                     </select>
                 </label>
+                {selectedReferrer === 'anders' && (
+                    <input
+                        type="text"
+                        name="found-through-anders"
+                        ref={register({ required: true })}
+                    />
+                )}
 
                 <label htmlFor="recipe-comments">
                     Opmerkingen:
