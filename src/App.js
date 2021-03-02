@@ -70,7 +70,14 @@ import './App.css';
 
 // Formulier omgezet met react-hook-form
 function App() {
-    const {handleSubmit, errors, register, watch} = useForm();
+    const {handleSubmit, errors, register, watch} = useForm({
+        mode: "onBlur",
+        defaultValues: {
+            "found-through": "advertentie",
+            age: 12,
+        },
+    });
+
     const selectedReferrer = watch('found-through');
 
     function onFormSubmit(data) {
@@ -129,7 +136,7 @@ function App() {
                     <input
                         type="text"
                         name="found-through-anders"
-                        ref={register({ required: true })}
+                        ref={register({required: true})}
                     />
                 )}
 
